@@ -1,0 +1,60 @@
+<mxfile host="ks_projection_gen">
+  <diagram id="ks-projection" name="KS projection (skeleton — ADR-124)">
+    <mxGraphModel dx="1422" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <object ks_iri="https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven" ks_type="Asset" ks_label="Stone oven" ks_facet="ArchitectureFacet" ks_bfo="BFO_0000040" ks_status="adopted" label="Stone oven" id="n0">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#262626;" vertex="1" parent="1">
+            <mxGeometry x="40" y="40" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_iri="https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking" ks_type="Capability" ks_label="Artisan baking" ks_facet="ArchitectureFacet" ks_bfo="BFO_0000016" ks_status="adopted" ks_value="80" ks_tag="core" ks_data="bakery:ovenCount xsd:integer = 2" label="Artisan baking" id="n1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#262626;" vertex="1" parent="1">
+            <mxGeometry x="240" y="40" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_iri="https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery" ks_type="Organization" ks_label="Corner Bakery" ks_bfo="BFO_0000027" ks_status="adopted" label="Corner Bakery" id="n2">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#262626;" vertex="1" parent="1">
+            <mxGeometry x="440" y="40" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_iri="https://schema.bra0.org/ks-modules/example-bakery#process-night-bake" ks_type="Process" ks_label="Night bake" ks_facet="ArchitectureFacet" ks_bfo="BFO_0000015" ks_status="adopted" label="Night bake" id="n3">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#262626;" vertex="1" parent="1">
+            <mxGeometry x="640" y="40" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_iri="https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread" ks_type="Purpose" ks_label="Fresh bread for the neighbourhood, every morning" ks_facet="IdentityFacet" ks_bfo="BFO_0000034" ks_status="adopted" label="Fresh bread for the neighbourhood, every morning" id="n4">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#262626;" vertex="1" parent="1">
+            <mxGeometry x="840" y="40" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_iri="https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast" ks_type="Task" ks_label="Buy breakfast on the way to work" ks_facet="ExperienceFacet" ks_bfo="BFO_0000020" ks_status="candidate" label="Buy breakfast on the way to work" id="n5">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#262626;" vertex="1" parent="1">
+            <mxGeometry x="1040" y="40" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_rel="performsProcess" id="e0">
+          <mxCell style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="n2" target="n3">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_rel="pursues" id="e1">
+          <mxCell style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="n2" target="n4">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_rel="realizes" id="e2">
+          <mxCell style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="n3" target="n1">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object ks_rel="uses" id="e3">
+          <mxCell style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="n3" target="n0">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

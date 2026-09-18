@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "iri": "https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery",
+      "type": "Organization",
+      "label": "Corner Bakery",
+      "bfo": "BFO_0000027",
+      "status": "adopted"
+    },
+    {
+      "iri": "https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread",
+      "type": "Purpose",
+      "label": "Fresh bread for the neighbourhood, every morning",
+      "facet": "IdentityFacet",
+      "bfo": "BFO_0000034",
+      "status": "adopted"
+    },
+    {
+      "iri": "https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking",
+      "type": "Capability",
+      "label": "Artisan baking",
+      "facet": "ArchitectureFacet",
+      "bfo": "BFO_0000016",
+      "status": "adopted",
+      "value": 80,
+      "tag": "core",
+      "data": "bakery:ovenCount xsd:integer = 2"
+    },
+    {
+      "iri": "https://schema.bra0.org/ks-modules/example-bakery#process-night-bake",
+      "type": "Process",
+      "label": "Night bake",
+      "facet": "ArchitectureFacet",
+      "bfo": "BFO_0000015",
+      "status": "adopted"
+    },
+    {
+      "iri": "https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven",
+      "type": "Asset",
+      "label": "Stone oven",
+      "facet": "ArchitectureFacet",
+      "bfo": "BFO_0000040",
+      "status": "adopted"
+    },
+    {
+      "iri": "https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast",
+      "type": "Task",
+      "label": "Buy breakfast on the way to work",
+      "facet": "ExperienceFacet",
+      "bfo": "BFO_0000020",
+      "status": "candidate"
+    }
+  ],
+  "edges": [
+    {
+      "rel": "pursues",
+      "source": "https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery",
+      "target": "https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread"
+    },
+    {
+      "rel": "performsProcess",
+      "source": "https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery",
+      "target": "https://schema.bra0.org/ks-modules/example-bakery#process-night-bake"
+    },
+    {
+      "rel": "realizes",
+      "source": "https://schema.bra0.org/ks-modules/example-bakery#process-night-bake",
+      "target": "https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking"
+    },
+    {
+      "rel": "uses",
+      "source": "https://schema.bra0.org/ks-modules/example-bakery#process-night-bake",
+      "target": "https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven"
+    }
+  ]
+}

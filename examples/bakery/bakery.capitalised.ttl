@@ -1,0 +1,46 @@
+# Capitalised from examples/bakery/bakery.skeleton.drawio by drawio2ttl.py — DO NOT hand-edit.
+# RDF is canonical; this is a one-way drawio→RDF capitalisation (README.md).
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix edgy: <https://schema.bra0.org/cross-domain/edgy#> .
+@prefix archimate: <https://purl.org/archimate#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven> rdf:type <https://schema.bra0.org/cross-domain/edgy#Asset> .
+<https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven> rdfs:label "Stone oven"@en .
+<https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven> edgy:belongsToFacet <https://schema.bra0.org/cross-domain/edgy#ArchitectureFacet> .
+<https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven> edgy:groundedInBFO obo:BFO_0000040 .
+<https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven> adms:status "adopted" .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> rdf:type <https://schema.bra0.org/cross-domain/edgy#Capability> .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> rdfs:label "Artisan baking"@en .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> edgy:belongsToFacet <https://schema.bra0.org/cross-domain/edgy#ArchitectureFacet> .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> edgy:groundedInBFO obo:BFO_0000016 .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> adms:status "adopted" .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> edgy:hasBusinessValue 80 .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> edgy:hasTag "core" .
+<https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> <https://schema.bra0.org/ks-modules/example-bakery#ovenCount> "2"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery> rdf:type <https://schema.bra0.org/cross-domain/edgy#Organization> .
+<https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery> rdfs:label "Corner Bakery"@en .
+<https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery> edgy:groundedInBFO obo:BFO_0000027 .
+<https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery> adms:status "adopted" .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> rdf:type <https://schema.bra0.org/cross-domain/edgy#Process> .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> rdfs:label "Night bake"@en .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> edgy:belongsToFacet <https://schema.bra0.org/cross-domain/edgy#ArchitectureFacet> .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> edgy:groundedInBFO obo:BFO_0000015 .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> adms:status "adopted" .
+<https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread> rdf:type <https://schema.bra0.org/cross-domain/edgy#Purpose> .
+<https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread> rdfs:label "Fresh bread for the neighbourhood, every morning"@en .
+<https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread> edgy:belongsToFacet <https://schema.bra0.org/cross-domain/edgy#IdentityFacet> .
+<https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread> edgy:groundedInBFO obo:BFO_0000034 .
+<https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread> adms:status "adopted" .
+<https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast> rdf:type <https://schema.bra0.org/cross-domain/edgy#Task> .
+<https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast> rdfs:label "Buy breakfast on the way to work"@en .
+<https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast> edgy:belongsToFacet <https://schema.bra0.org/cross-domain/edgy#ExperienceFacet> .
+<https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast> edgy:groundedInBFO obo:BFO_0000020 .
+<https://schema.bra0.org/ks-modules/example-bakery#task-buy-breakfast> adms:status "candidate" .
+<https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery> <https://schema.bra0.org/cross-domain/edgy#performsProcess> <https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> .
+<https://schema.bra0.org/ks-modules/example-bakery#org-corner-bakery> <https://schema.bra0.org/cross-domain/edgy#pursues> <https://schema.bra0.org/ks-modules/example-bakery#purpose-fresh-bread> .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> <https://schema.bra0.org/cross-domain/edgy#realizes> <https://schema.bra0.org/ks-modules/example-bakery#cap-artisan-baking> .
+<https://schema.bra0.org/ks-modules/example-bakery#process-night-bake> <https://schema.bra0.org/cross-domain/edgy#uses> <https://schema.bra0.org/ks-modules/example-bakery#asset-stone-oven> .

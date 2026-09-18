@@ -1,0 +1,2 @@
+# Domain-module prefixes for the bakery example, passed to drawio2ttl.py --prefixes.
+@prefix bakery: <https://schema.bra0.org/ks-modules/example-bakery#> .
