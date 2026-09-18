@@ -4,7 +4,7 @@
 # stdlib-only). The READ-ONLY reverse of drawio2ttl.py, fenced by ADR-124.
 # =============================================================================
 # Reads a {nodes, edges} JSON projection of the sovereign RDF KS (a SPARQL
-# SELECT result) and writes a .drawio whose <object> wrappers carry the full
+# SELECT result — ks_project.py produces it) and writes a .drawio whose <object> wrappers carry the full
 # ks_* substrate, so drawio2ttl.py round-trips the result LOSSLESSLY.
 #
 #   ./ks_projection_gen.py projection.json > viewpoint.skeleton.drawio
@@ -48,7 +48,8 @@ import html
 #     }
 #   ],
 #   "edges": [
-#     { "rel": "edgy:belongsToFacet", "source": "<iri>", "target": "<iri>", "label": "..." }
+#     { "rel": "edgy:belongsToFacet", "source": "<iri>", "target": "<iri>", "label": "...",
+#       "style": "endArrow=block;..." }    # optional draw.io style (else neutral default)
 #   ]
 # }
 # ----------------------------------------------------------------------------
@@ -149,7 +150,7 @@ def main(path):
             kvs.append('label="%s"' % attr(e["label"]))
         out.append('        <object %s id="%s">' % (" ".join(kvs), eid))
         out.append('          <mxCell style="%s" edge="1" parent="1" source="%s" target="%s">'
-                   % (DEFAULT_EDGE_STYLE, s_id, t_id))
+                   % (attr(e.get("style", DEFAULT_EDGE_STYLE)), s_id, t_id))
         out.append('            <mxGeometry relative="1" as="geometry" />')
         out.append('          </mxCell>')
         out.append('        </object>')

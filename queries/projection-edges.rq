@@ -1,0 +1,14 @@
+# Diagram Bridge — KS projection, EDGES: every statement linking two individuals of the
+# Knowledge Space. rdf:type is a node attribute, never an edge. An untyped target or
+# source is kept: ks_project.py renders it as a reference endpoint.
+#
+# Edit the VALUES line to run this by hand; ks_project.py rewrites it from --ks-ns.
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?source ?rel ?target WHERE {
+  VALUES ?ns { "https://schema.bra0.org/ks-modules/" }
+  ?source ?rel ?target .
+  FILTER(isIRI(?source) && isIRI(?target) && ?rel != rdf:type)
+  FILTER(STRSTARTS(STR(?source), ?ns) && STRSTARTS(STR(?target), ?ns))
+}
+ORDER BY ?source ?rel ?target

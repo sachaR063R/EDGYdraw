@@ -1,0 +1,26 @@
+# Diagram Bridge — KS projection, NODES: every typed individual of the Knowledge Space
+# with the attributes the bridge carries as ks_*. One row per (individual, type, label):
+# ks_project.py folds the rows into one node per IRI.
+#
+# Edit the VALUES line to run this by hand; ks_project.py rewrites it from --ks-ns.
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX edgy: <https://schema.bra0.org/cross-domain/edgy#>
+
+SELECT ?iri ?type ?label ?facet ?bfo ?status ?value ?tag WHERE {
+  VALUES ?ns { "https://schema.bra0.org/ks-modules/" }
+  ?iri rdf:type ?type .
+  FILTER(isIRI(?iri) && STRSTARTS(STR(?iri), ?ns))
+  # schema-level typing (owl:NamedIndividual, rdfs:Resource, …) is not a diagram type
+  FILTER(!STRSTARTS(STR(?type), "http://www.w3.org/2002/07/owl#")
+      && !STRSTARTS(STR(?type), "http://www.w3.org/2000/01/rdf-schema#")
+      && !STRSTARTS(STR(?type), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+  OPTIONAL { ?iri rdfs:label ?label . FILTER(LANG(?label) IN ("en", "")) }
+  OPTIONAL { ?iri edgy:belongsToFacet ?facet }
+  OPTIONAL { ?iri edgy:groundedInBFO ?bfo }
+  OPTIONAL { ?iri adms:status ?status }
+  OPTIONAL { ?iri edgy:hasBusinessValue ?value }
+  OPTIONAL { ?iri edgy:hasTag ?tag }
+}
+ORDER BY ?iri ?type ?label

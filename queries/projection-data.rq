@@ -1,0 +1,21 @@
+# Diagram Bridge — KS projection, DATA: the literal-valued statements of the domain
+# modules, carried on a node as ks_data. The properties that have their own ks_*
+# attribute (label, status, business value, tag) are excluded, and so are annotations
+# (rdfs:, skos:, dcterms:, owl:) — documentation of the individual, not diagram data.
+#
+# Edit the VALUES line to run this by hand; ks_project.py rewrites it from --ks-ns.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX edgy: <https://schema.bra0.org/cross-domain/edgy#>
+
+SELECT ?iri ?pred ?val WHERE {
+  VALUES ?ns { "https://schema.bra0.org/ks-modules/" }
+  ?iri ?pred ?val .
+  FILTER(isIRI(?iri) && STRSTARTS(STR(?iri), ?ns) && isLiteral(?val))
+  FILTER(?pred NOT IN (adms:status, edgy:hasBusinessValue, edgy:hasTag))
+  FILTER(!STRSTARTS(STR(?pred), "http://www.w3.org/2000/01/rdf-schema#")
+      && !STRSTARTS(STR(?pred), "http://www.w3.org/2004/02/skos/core#")
+      && !STRSTARTS(STR(?pred), "http://purl.org/dc/terms/")
+      && !STRSTARTS(STR(?pred), "http://www.w3.org/2002/07/owl#"))
+}
+ORDER BY ?iri ?pred ?val
