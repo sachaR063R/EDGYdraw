@@ -42,14 +42,16 @@ triples of its own.
 | `palettes/edgy-referential.gen.py` | generator of that library (regenerate, never hand-edit the `.xml`) |
 | `ks_projection_gen.py` | Knowledge Space projection (JSON) → `.drawio` |
 | `drawio2ttl.py` | `.drawio` → Turtle |
+| `ks_merge.py` | merge the extracted Turtle into an existing Knowledge Space (additive, conflicts reported) |
 | `drawio_lint.py` | structural lint of a `.drawio` before extraction |
 | `roundtrip.sh` | extract a viewpoint, then validate the Turtle with SHACL (rudof) |
 | `coach.py` | learner-facing report over the same checks plus SPARQL guards (English/French) |
-| `examples/bakery/` | a small neutral example, both directions |
+| `examples/bakery/` | a small neutral example: both directions, then a merge into `ks.ttl` |
 
 ## Quick start
 
-Python 3 standard library only for the generators, the extractor and the lint.
+Python 3 standard library only for the generators, the extractor and the lint; the merge also calls
+the oxigraph CLI.
 
 ```sh
 # 1. Load the stencils: draw.io desktop > File > Open Library from > Device
@@ -62,6 +64,11 @@ Python 3 standard library only for the generators, the extractor and the lint.
 # 3. Diagram -> Knowledge Space
 ./drawio_lint.py bakery.drawio
 ./drawio2ttl.py bakery.drawio --prefixes examples/bakery/prefixes.ttl > bakery.ttl
+
+# 4. Enrich an existing Knowledge Space (dry run, then append to a working copy)
+cp examples/bakery/ks.ttl my-ks.ttl
+./ks_merge.py bakery.ttl --ks my-ks.ttl
+./ks_merge.py bakery.ttl --ks my-ks.ttl --append-to my-ks.ttl
 ```
 
 `projection.json` is a `{nodes, edges}` document, typically the result of a SPARQL SELECT over the
@@ -74,8 +81,28 @@ Domain-module vocabularies are declared in a Turtle file of `@prefix` lines pass
 `--prefixes` (repeatable). `--ks-ns <iri>` moves the namespace boundary that every `ks_iri` must
 sit under (default `https://schema.bra0.org/ks-modules/`).
 
-SHACL validation and the coach need [rudof](https://github.com/rudof-project/rudof) and
-[oxigraph](https://github.com/oxigraph/oxigraph) on the `PATH`:
+### Merging into an existing Knowledge Space
+
+`ks_merge.py` compares the extracted graph with the Knowledge Space file(s) given by `--ks` and
+keeps the triples the Knowledge Space does not hold yet. Without an output option it prints that
+delta and a report; `--out <file>` writes it as a separate graph; `--append-to <file.ttl>` appends
+it as a dated block at the end of a Knowledge Space file.
+
+- **The merge only adds.** A diagram is a partial viewpoint: what it omits is left untouched in the
+  Knowledge Space.
+- **The Knowledge Space wins a conflict.** Labels (per language), `adms:status`,
+  `edgy:hasBusinessValue`, `edgy:belongsToFacet` and `edgy:groundedInBFO` are treated as
+  single-valued (extend with `--single-valued <iri>`). When the diagram disagrees with the Knowledge
+  Space on one of them, the triple is withheld and reported, and the exit code is 1. Resolve it by
+  hand, in the Knowledge Space or in the diagram.
+- No existing statement is rewritten, and running the merge twice adds nothing the second time.
+
+On the bakery example: 36 extracted triples, 11 already known, 23 added, 2 conflicts withheld (a
+label and a status the hand-authored `ks.ttl` states differently).
+
+`ks_merge.py` needs the [oxigraph](https://github.com/oxigraph/oxigraph) CLI on the `PATH` to parse
+RDF. SHACL validation and the coach need [rudof](https://github.com/rudof-project/rudof) and
+oxigraph on the `PATH`:
 
 ```sh
 KS_PREFIXES=examples/bakery/prefixes.ttl ./roundtrip.sh bakery.drawio <shapes.ttl> [support.ttl ...]
@@ -93,9 +120,10 @@ python3 palettes/edgy-referential.gen.py --edgy-ttl edgy.ttl
 `0.1.0-draft`.
 
 - Verified: the bakery example round-trips (projection → `.drawio` → lint → Turtle) deterministically,
-  and the stencil library regenerates byte-identically from the published EDGY ontology.
-- Not covered yet: merging extracted Turtle into an existing Knowledge Space (the extractor emits a
-  standalone graph), a generic SPARQL query producing `projection.json`, automatic diagram layout,
+  merges into `examples/bakery/ks.ttl` idempotently with its two conflicts reported, and the stencil
+  library regenerates byte-identically from the published EDGY ontology.
+- Not covered yet: retracting or replacing Knowledge Space statements from a diagram (the merge is
+  additive), a generic SPARQL query producing `projection.json`, automatic diagram layout,
   and the UI-layer validation behind `drawio2ttl.py --ui-out` (its vocabulary is unpublished).
 
 ## Licensing

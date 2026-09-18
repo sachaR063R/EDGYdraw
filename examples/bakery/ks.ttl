@@ -1,0 +1,29 @@
+# The bakery Knowledge Space as it stands BEFORE the diagram is merged in: it already
+# knows the organisation, its purpose and one capability, hand-authored.
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix adms:   <http://www.w3.org/ns/adms#> .
+@prefix obo:    <http://purl.obolibrary.org/obo/> .
+@prefix edgy:   <https://schema.bra0.org/cross-domain/edgy#> .
+@prefix bakery: <https://schema.bra0.org/ks-modules/example-bakery#> .
+
+bakery:org-corner-bakery a edgy:Organization ;
+    rdfs:label "Corner Bakery"@en ;
+    edgy:groundedInBFO obo:BFO_0000027 ;
+    adms:status "adopted" ;
+    edgy:pursues bakery:purpose-fresh-bread .
+
+bakery:purpose-fresh-bread a edgy:Purpose ;
+    rdfs:label "Fresh bread for the neighbourhood, every morning"@en ;
+    edgy:belongsToFacet edgy:IdentityFacet ;
+    edgy:groundedInBFO obo:BFO_0000034 ;
+    adms:status "adopted" .
+
+# Known to the KS and absent from the diagram: the merge must leave it alone.
+bakery:cap-local-sourcing a edgy:Capability ;
+    rdfs:label "Local flour sourcing"@en ;
+    adms:status "candidate" .
+
+# Same individual as in the diagram, with a different label and status: a conflict.
+bakery:cap-artisan-baking a edgy:Capability ;
+    rdfs:label "Sourdough baking"@en ;
+    adms:status "candidate" .
